@@ -1,0 +1,35 @@
+/* global.css */
+:root {
+  --blue: #0b0d7e;
+  --dark: #121212;
+  --gray: #b3b3b3;
+  --light-dark: #282828;
+  --white: #fff;
+}
+body {
+  background: url(../assets/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--white);
+  font-family: 'Circular Std', system-ui, sans-serif;
+}
+
+
+.page {
+  padding: 20px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.main-content {
+  margin-left: -60px; /* Same as sidebar width */
+  min-height: 100vh;
+  background: transparent;
+  width:1200px;
+  padding-top: 64px; /* Same as navbar height */
+}
