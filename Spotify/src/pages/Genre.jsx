@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../styles/genre.css';
 import SongCard from '../components/SongCard';
+import Player from '../components/Player';
+
 import downloadCover from '../assets/download.jpeg';
 import downloadCover1 from '../assets/download1.jpeg';
 import downloadCover2 from '../assets/download 2.jpeg';
@@ -140,8 +142,8 @@ function Genre({ setCurrentSong, setPlaylist, setCurrentIndex, currentIndex, cur
     
     // Set the playlist first
     setPlaylist(songs);
-    // Set the current song
-    setCurrentSong(songs[startIndex]);
+    // Set the current song with autoplay enabled
+    setCurrentSong(songs[startIndex], true);
     // Set the current index
     setCurrentIndex(startIndex);
   };
@@ -163,8 +165,8 @@ function Genre({ setCurrentSong, setPlaylist, setCurrentIndex, currentIndex, cur
     
     // Set the playlist first
     setPlaylist(songs);
-    // Set the current song
-    setCurrentSong(song);
+    // Set the current song with autoplay enabled
+    setCurrentSong(song, true);
     // Set the current index
     setCurrentIndex(songIndex);
   };
@@ -195,7 +197,7 @@ function Genre({ setCurrentSong, setPlaylist, setCurrentIndex, currentIndex, cur
     if (playlist && playlist.length > 0 && currentIndex < playlist.length - 1) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
-      setCurrentSong(playlist[nextIndex]);
+      setCurrentSong(playlist[nextIndex], true);
     }
   };
 
@@ -203,7 +205,7 @@ function Genre({ setCurrentSong, setPlaylist, setCurrentIndex, currentIndex, cur
     if (playlist && playlist.length > 0 && currentIndex > 0) {
       const prevIndex = currentIndex - 1;
       setCurrentIndex(prevIndex);
-      setCurrentSong(playlist[prevIndex]);
+      setCurrentSong(playlist[prevIndex], true);
     }
   };
 
@@ -368,19 +370,6 @@ function Genre({ setCurrentSong, setPlaylist, setCurrentIndex, currentIndex, cur
       </div>
 
       {/* Player Component - Add this if you want the player to show in genre view */}
-      {currentSong && (
-        <div className="player-container">
-          <Player
-            currentSong={currentSong}
-            playlist={playlist}
-            currentIndex={currentIndex}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            setCurrentIndex={setCurrentIndex}
-            setCurrentSong={setCurrentSong}
-          />
-        </div>
-      )}
       
       <br/><br/><br/>
     </div>

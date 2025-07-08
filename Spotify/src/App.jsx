@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
@@ -44,12 +43,20 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(false)
   const [playlist, setPlaylist] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [repeatMode, setRepeatMode] = useState("off") // Add repeatMode to App state
+  const [repeatMode, setRepeatMode] = useState("off")
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false) // Add this state
 
   // Function to handle song selection - sets song and shows sidebar
-  const handleSongSelect = (song) => {
+  const handleSongSelect = (song, autoPlay = false) => {
     setCurrentSong(song)
     setShowSidebar(true)
+    setShouldAutoPlay(autoPlay)
+  }
+
+  // Function to handle song selection from Genre page (without sidebar)
+  const handleGenreSongSelect = (song, autoPlay = false) => {
+    setCurrentSong(song)
+    setShouldAutoPlay(autoPlay)
   }
 
   // Function to close sidebar without stopping song
@@ -64,11 +71,13 @@ function App() {
         // Loop back to first song in repeat all mode
         setCurrentIndex(0)
         setCurrentSong(playlist[0])
+        setShouldAutoPlay(true)
       } else if (currentIndex < playlist.length - 1) {
         // Normal next song
         const nextIndex = currentIndex + 1
         setCurrentIndex(nextIndex)
         setCurrentSong(playlist[nextIndex])
+        setShouldAutoPlay(true)
       }
     }
   }
@@ -81,11 +90,13 @@ function App() {
         const lastIndex = playlist.length - 1
         setCurrentIndex(lastIndex)
         setCurrentSong(playlist[lastIndex])
+        setShouldAutoPlay(true)
       } else if (currentIndex > 0) {
         // Normal previous song
         const prevIndex = currentIndex - 1
         setCurrentIndex(prevIndex)
         setCurrentSong(playlist[prevIndex])
+        setShouldAutoPlay(true)
       }
     }
   }
@@ -97,12 +108,11 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home setCurrentSong={handleSongSelect} />} />
-            <Route path="/album/:id" element={<Album />} />
             <Route
-              path="/genre/:type"
+              path="/album/:id"
               element={
-                <Genre
-                  setCurrentSong={setCurrentSong}
+                <Album
+                  setCurrentSong={handleSongSelect}
                   setPlaylist={setPlaylist}
                   setCurrentIndex={setCurrentIndex}
                   currentSong={currentSong}
@@ -114,12 +124,27 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/genre/:type"
+              element={
+                <Genre
+                  setCurrentSong={handleGenreSongSelect} // Use the genre-specific handler
+                  setPlaylist={setPlaylist}
+                  setCurrentIndex={setCurrentIndex}
+                  currentSong={currentSong}
+                  playlist={playlist}
+                  currentIndex={currentIndex}
+                  repeatMode={repeatMode}
+                  setRepeatMode={setRepeatMode}
+                />
+              }
+            />
             <Route path="/search" element={<Search />} />
             <Route
               path="/playlist/:id"
               element={
                 <Playlist
-                  setCurrentSong={setCurrentSong}
+                  setCurrentSong={handleGenreSongSelect}
                   setPlaylist={setPlaylist}
                   setCurrentIndex={setCurrentIndex}
                   currentSong={currentSong}
@@ -133,6 +158,7 @@ function App() {
             />
           </Routes>
         </div>
+
         {/* Sidebar for song info and artist bio */}
         {showSidebar && currentSong && (
           <div className="artist-bio-sidebar">
@@ -187,6 +213,8 @@ function App() {
         setCurrentSong={setCurrentSong}
         repeatMode={repeatMode}
         setRepeatMode={setRepeatMode}
+        shouldAutoPlay={shouldAutoPlay} // Pass the auto-play flag
+        setShouldAutoPlay={setShouldAutoPlay} // Pass the setter
       />
     </>
   )
