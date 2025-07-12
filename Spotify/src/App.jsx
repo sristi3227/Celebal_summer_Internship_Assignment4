@@ -6,8 +6,10 @@ import Player from "./components/Player"
 import Home from "./pages/Home"
 import Album from "./pages/Album"
 import Genre from "./pages/Genre"
-import Search from "./pages/Search"
+
 import Playlist from "./pages/Playlist"
+import Profile from "./pages/Profile"
+
 import downloadCover from "./assets/download.jpeg"
 import downloadCover2 from "./assets/download 2.jpeg"
 import downloadCover1 from "./assets/download1.jpeg"
@@ -24,6 +26,11 @@ const artistBios = {
   "Rahat Fateh Ali Khan": `Rahat Fateh Ali Khan is a globally acclaimed Pakistani vocalist, best known for his command over Qawwali—a devotional form of Sufi music. He is the nephew of the legendary Nusrat Fateh Ali Khan and has carried forward the rich family tradition of soulful music. Apart from Qawwali, Rahat has performed ghazals, classical, and Bollywood playback songs, winning hearts with hits like "O Re Piya", "Teri Ore", and "Afreen Afreen". His emotional depth and vocal mastery have earned him a revered place across South Asia and in international music scenes alike.`,
   "Sanjay Leela Bhansali": `Sanjay Leela Bhansali is a renowned Indian film director, producer, screenwriter, and music composer, celebrated for his grand cinematic vision and emotionally rich storytelling. He made his directorial debut with "Khamoshi: The Musical", but gained massive acclaim with "Hum Dil De Chuke Sanam", followed by masterpieces like "Devdas", "Goliyon Ki Raasleela Ram-Leela", "Bajirao Mastani", and "Padmaavat". Bhansali is known for his opulent sets, intricate costumes, soulful music, and powerful female protagonists. Over his illustrious career, he has won multiple National Film Awards, Filmfare Awards, and Padma Shri, establishing himself as one of India's most influential filmmakers.`,
   "Osman Mir": `Osman Mir is a celebrated Indian playback singer and folk artist, best known for his powerful renditions of devotional, classical, and Sufi music. He hails from Gujarat and initially gained recognition through his performances in traditional Gujarati folk music and bhajans. His breakthrough into mainstream Bollywood came with the soulful track "Moraribapu" and later the immensely popular "Mor Bani Thanghat Kare" in Sanjay Leela Bhansali's *Goliyon Ki Raasleela Ram-Leela*. Known for his deep, soulful voice and command over classical ragas, Osman Mir has a devoted following across India and the Gujarati diaspora. His music is marked by spiritual intensity and emotional depth, making him a prominent voice in devotional and folk circles.`,
+  "Pritam": `Pritam Chakraborty, popularly known as Pritam, is a renowned Indian music composer and playback singer, celebrated for his work in Bollywood films. He gained fame with his compositions for movies like "Gangster", "Jab We Met", and "Barfi!", blending Indian classical music with contemporary sounds. Pritam's versatility spans various genres, including rock, pop, and traditional Indian music. He has won numerous awards, including Filmfare Awards and IIFA Awards, and is known for his ability to create memorable melodies that resonate with audiences across generations.`,
+  "Arijit Singh": `Arijit Singh is one of the most beloved playback singers in India, known for his soulful and emotive voice. Rising to prominence with songs like "Tum Hi Ho" and "Channa Mereya", he has become the voice behind countless Bollywood romantic hits and continues to captivate audiences with his vocal range and expressive singing style.`,
+    "Bruno Mars": `Bruno Mars (real name Peter Gene Hernandez) is a Grammy-winning artist celebrated for blending pop, funk, soul, and R&B into infectious hits. Known for songs like "Uptown Funk", "Just the Way You Are", and "24K Magic", his throwback style and energetic performances have made him one of the most dynamic entertainers in contemporary music.`,
+    "Lady Gaga": `Lady Gaga (real name Stefani Joanne Angelina Germanotta) is a multi-talented singer, songwriter, and actress who rose to fame with hits like "Poker Face", "Bad Romance", and "Shallow". Renowned for her bold fashion, genre versatility, and vocal power, she blends pop, dance, rock, and jazz with fearless creativity, earning her global stardom and critical acclaim across music and film.`,
+
 }
 
 const artistImages = {
@@ -36,6 +43,9 @@ const artistImages = {
   "The Weeknd": downloadCover1,
   "Glass Animals": downloadCover3,
   "Rahat Fateh Ali Khan": "https://fankaronline.com/content/uploads/2016/07/Rahat-Fateh-Ali-Khan.png",
+  "Pritam": "https://stat4.bollywoodhungama.in/wp-content/uploads/2025/02/620x450-4842-1-354x199.jpg",
+  "Arijit": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69kbXgwYDwS_6dhgRdRIVHSV2HekIZWDsFQ&s",
+  "Bruno Mars": "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
 }
 
 function App() {
@@ -44,36 +54,30 @@ function App() {
   const [playlist, setPlaylist] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [repeatMode, setRepeatMode] = useState("off")
-  const [shouldAutoPlay, setShouldAutoPlay] = useState(false) // Add this state
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false)
 
-  // Function to handle song selection - sets song and shows sidebar
   const handleSongSelect = (song, autoPlay = false) => {
     setCurrentSong(song)
     setShowSidebar(true)
     setShouldAutoPlay(autoPlay)
   }
 
-  // Function to handle song selection from Genre page (without sidebar)
   const handleGenreSongSelect = (song, autoPlay = false) => {
     setCurrentSong(song)
     setShouldAutoPlay(autoPlay)
   }
 
-  // Function to close sidebar without stopping song
   const closeSidebar = () => {
     setShowSidebar(false)
   }
 
-  // Handle next song with repeat logic
   const handleNext = () => {
     if (playlist.length > 0) {
       if (repeatMode === "all" && currentIndex === playlist.length - 1) {
-        // Loop back to first song in repeat all mode
         setCurrentIndex(0)
         setCurrentSong(playlist[0])
         setShouldAutoPlay(true)
       } else if (currentIndex < playlist.length - 1) {
-        // Normal next song
         const nextIndex = currentIndex + 1
         setCurrentIndex(nextIndex)
         setCurrentSong(playlist[nextIndex])
@@ -82,17 +86,14 @@ function App() {
     }
   }
 
-  // Handle previous song with repeat logic
   const handlePrevious = () => {
     if (playlist.length > 0) {
       if (repeatMode === "all" && currentIndex === 0) {
-        // Loop to last song in repeat all mode
         const lastIndex = playlist.length - 1
         setCurrentIndex(lastIndex)
         setCurrentSong(playlist[lastIndex])
         setShouldAutoPlay(true)
       } else if (currentIndex > 0) {
-        // Normal previous song
         const prevIndex = currentIndex - 1
         setCurrentIndex(prevIndex)
         setCurrentSong(playlist[prevIndex])
@@ -128,7 +129,7 @@ function App() {
               path="/genre/:type"
               element={
                 <Genre
-                  setCurrentSong={handleGenreSongSelect} // Use the genre-specific handler
+                  setCurrentSong={handleGenreSongSelect}
                   setPlaylist={setPlaylist}
                   setCurrentIndex={setCurrentIndex}
                   currentSong={currentSong}
@@ -139,7 +140,7 @@ function App() {
                 />
               }
             />
-            <Route path="/search" element={<Search />} />
+           
             <Route
               path="/playlist/:id"
               element={
@@ -156,6 +157,7 @@ function App() {
                 />
               }
             />
+            <Route path="/profile" element={<Profile />} /> {/* ✅ Profile route added */}
           </Routes>
         </div>
 
@@ -165,8 +167,7 @@ function App() {
             <button className="close-bio" onClick={closeSidebar}>
               ✖
             </button>
-            {/* Song Info Section */}
-            <div className="sidebar-song-info" style={{ textAlign: "center", marginBottom: 24, width: "100%" }}>
+            <div className="sidebar-song-info" style={{ textAlign: "center", marginBottom: 24 }}>
               <img
                 src={currentSong.cover || "/placeholder.svg"}
                 alt={currentSong.title}
@@ -175,26 +176,25 @@ function App() {
               <h2 style={{ margin: 0, fontSize: 22 }}>{currentSong.title}</h2>
               <p style={{ color: "#b3b3b3", margin: "8px 0 0 0", fontSize: 16 }}>{currentSong.artist}</p>
             </div>
-            {/* Artist(s) Info Section */}
-            <div className="sidebar-artist-info" style={{ width: "100%", marginTop: 10 }}>
-              {currentSong.artist.split(",").map((artist, idx) => {
+            <div className="sidebar-artist-info">
+              {currentSong.artist.split(",").map((artist) => {
                 const name = artist.trim()
                 const img =
                   artistImages[name] ||
-                  "https://ui-avatars.com/api/?background=0b0d7e&color=fff&name=" + encodeURIComponent(name)
+                  `https://ui-avatars.com/api/?background=0b0d7e&color=fff&name=${encodeURIComponent(name)}`
                 const bio = artistBios[name]
                 return (
-                  <div key={name} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
-                    {img && (
-                      <img
-                        src={img || "/placeholder.svg"}
-                        alt={name}
-                        style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover" }}
-                      />
-                    )}
+                  <div key={name} style={{ display: "flex", gap: 12, marginBottom: 18 }}>
+                    <img
+                      src={img}
+                      alt={name}
+                      style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover" }}
+                    />
                     <div>
                       <h3 style={{ margin: 0, fontSize: 18 }}>{name}</h3>
-                      <p style={{ color: "#ccc", fontSize: 14, margin: "6px 0 0 0" }}>{bio || "No bio available."}</p>
+                      <p style={{ color: "#ccc", fontSize: 14, margin: "6px 0 0 0" }}>
+                        {bio || "No bio available."}
+                      </p>
                     </div>
                   </div>
                 )
@@ -213,8 +213,8 @@ function App() {
         setCurrentSong={setCurrentSong}
         repeatMode={repeatMode}
         setRepeatMode={setRepeatMode}
-        shouldAutoPlay={shouldAutoPlay} // Pass the auto-play flag
-        setShouldAutoPlay={setShouldAutoPlay} // Pass the setter
+        shouldAutoPlay={shouldAutoPlay}
+        setShouldAutoPlay={setShouldAutoPlay}
       />
     </>
   )

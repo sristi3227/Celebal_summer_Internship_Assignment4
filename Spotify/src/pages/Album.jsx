@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import SongCard from "../components/SongCard"
@@ -11,6 +10,7 @@ import downloadCover3 from "../assets/download3.jpeg"
 import downloadCover4 from "../assets/download4.jpg"
 import downloadCover5 from "../assets/download5.jpg"
 import downloadCover6 from "../assets/download6.jpg"
+import downloadCover7 from "../assets/images.jpg"
 
 // All songs data (same as in Home.jsx)
 const allSongs = [
@@ -48,6 +48,97 @@ const allSongs = [
     url: "/music/The Weeknd - Blinding Lights (Official Audio).mp3",
   },
   { title: "Heat Waves", artist: "Glass Animals", cover: downloadCover3, url: "/music/Heat Waves - Glass Animals.mp3" },
+{
+    title: "Hua Mai",
+    artist: "Raghav Chaitanya,Pritam",
+    cover: downloadCover7,
+    url: "/music/Hua Main.mp3",
+  },
+  {
+        title: "Bojhena Se Bojhena",
+        artist: "Arijit Singh",
+        cover: "https://upload.wikimedia.org/wikipedia/en/5/54/It_is_the_poster_of_the_film_Bojhena_Shey_Bojhena.jpg",
+        url: "/music/Bojhena-Se-Bojhena.mp3",
+      },
+      {
+        title: "Jao Pakhi Bolo",
+        artist: "Shreya Ghoshal",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJdeCponDM1xIGoECSGxwPHVRD1GAEvBjuIA&s",
+        url: "/music/Jao Pakhi.mp3",
+      },
+      {
+        title: "Megher Paalok",
+        artist: "Shreya Ghoshal",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJdeCponDM1xIGoECSGxwPHVRD1GAEvBjuIA&s",
+        url: "/music/Megher-Palok.mp3",
+      },
+      {
+        title: "Ae Dil Hai Mushkil",
+        artist: "Pritam, Arijit Singh",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69kbXgwYDwS_6dhgRdRIVHSV2HekIZWDsFQ&s",
+        url: "/music/Ae Dil Hai Mushkil.mp3",
+      },
+      {
+        title: "Shayad",
+        artist: "Pritam, Arijit Singh",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69kbXgwYDwS_6dhgRdRIVHSV2HekIZWDsFQ&s",
+        url: "/music/Shayad.mp3",
+      },
+      {
+        title: "Hawayein",
+        artist: "Arijit Singh",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69kbXgwYDwS_6dhgRdRIVHSV2HekIZWDsFQ&s",
+        url: "/music/Hawayein.mp3",
+      },
+      {
+        title: "Mon Majhi Re",
+        artist: "Arijit Singh",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjwDN8PsmRFpERNlhIkPsPZo8kP7w81V0Z4g&s",
+        url: "/music/Mon Majhi Re.mp3",
+      },
+      {
+    title: "Die With  A Smile",
+    artist: "Bruno Mars,Lady Gaga",
+    cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7iqorfhMzSGMQ1TRCFBtHND7VhtsX_6SYzQ&s",
+    url: "/music/Die With A Smile.mp3",
+  },
+   {
+    title: "Talking To The Moon",
+    artist: "Bruno Mars",
+    cover: "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+    url: "/music/Talking To The Moon.mp3",
+  },
+  
+  {
+    title: "Just The Way You Are",
+    artist: "Bruno Mars",
+    cover: "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+    url: "/music/Just The Way You Are.mp3",
+  },
+  {
+    title: "Saibo",
+    artist: "Shreya Ghoshal, Tochi Raina",
+    cover: "https://pagalnew.com/coverimages/Saibo-Shor-in-the-City-Original-Motion-Picture-Soundtrack-500-500.jpg",
+    url: "/music/Saibo.mp3",
+  },
+  {
+    title: "Ajnabi Hawayein",
+    artist: "Shreya Ghoshal",
+    cover: "https://pagalfree.com/images/128Ajnabi%20Hawaayein%20Bekrara%20Bahein%20-%20Shaapit%20128%20Kbps.jpg",
+    url: "/music/Ajnabi Hawaayein.mp3",
+  },
+  {
+    title: "Tujh Mei Rab Dikhta Hai",
+    artist: "Shreya Ghoshal",
+    cover: "https://pagalnew.com/coverimages/Tujh-Mein-Rab-Dikhta-Hai-II-Rab-Ne-Bana-Di-Jodi-500-500.jpg",
+    url: "/music/Tujh Mein Rab Dikhta Hai.mp3",
+  },
+  {
+    title: "Ami Je Tomar 3.0",
+    artist: "Shreya Ghoshal",
+    cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyh-Xwc0gP8focfn8281aMhMU_BWu51Im0LQ&s",
+    url: "/music/Ami Je Tomar 3.mp3",
+  },
 ]
 
 // Artist information
@@ -94,6 +185,27 @@ const artistInfo = {
     genre: "Bollywood, Classical",
     followers: "15.7M",
   },
+  "Pritam": {
+    name: "Pritam",
+    image: "https://stat4.bollywoodhungama.in/wp-content/uploads/2025/02/620x450-4842-1-354x199.jpg",
+    bio: "Pritam Chakraborty, also known as Pritam, is an Indian music composer, record producer and music director for Bollywood films",
+    genre: "Bollywood, Pop",
+    followers: "44.9M",
+  },
+  "Bruno Mars": {
+    name: "Bruno Mars",
+    image: "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+    bio: "Bruno Mars is an American singer, songwriter, and performer known for his retro-inspired sound, smooth vocals, and electrifying stage presence",
+    genre: "Funk, Pop",
+    followers: "56.9M",
+  },
+  "Arijit Singh": {
+    name: "Arijit Singh", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69kbXgwYDwS_6dhgRdRIVHSV2HekIZWDsFQ&s",
+    bio: "Indian playback singer, music composer and record producer.",
+    genre: "Bollywood, Pop",
+    followers: "50.2M",
+  },
   DojaCat: {
     name: "Doja Cat",
     image: downloadCover5,
@@ -101,9 +213,21 @@ const artistInfo = {
     genre: "Hip-Hop, Pop, R&B",
     followers: "24.6M",
   },
+   
+
 }
 
-function Album({ setCurrentSong }) {
+function Album({
+  setCurrentSong,
+  setPlaylist,
+  setCurrentIndex,
+  currentSong,
+  playlist,
+  currentIndex,
+  repeatMode,
+  onNext,
+  onPrevious,
+}) {
   const { id } = useParams()
   const navigate = useNavigate()
   const [albumSongs, setAlbumSongs] = useState([])
@@ -113,7 +237,6 @@ function Album({ setCurrentSong }) {
   useEffect(() => {
     // Decode the artist name from URL
     const artistName = decodeURIComponent(id)
-
     // Find songs by this artist (including collaborations)
     const songsByArtist = allSongs.filter((song) => song.artist.toLowerCase().includes(artistName.toLowerCase()))
 
@@ -132,6 +255,9 @@ function Album({ setCurrentSong }) {
 
   const handlePlayAll = () => {
     if (albumSongs.length > 0) {
+      // Set up the playlist with all album songs
+      setPlaylist(albumSongs)
+      setCurrentIndex(0)
       setCurrentSong(albumSongs[0])
       setIsPlaying(true)
     }
@@ -139,10 +265,20 @@ function Album({ setCurrentSong }) {
 
   const handleShuffle = () => {
     if (albumSongs.length > 0) {
-      const shuffledIndex = Math.floor(Math.random() * albumSongs.length)
-      setCurrentSong(albumSongs[shuffledIndex])
+      // Create shuffled playlist
+      const shuffledSongs = [...albumSongs].sort(() => Math.random() - 0.5)
+      setPlaylist(shuffledSongs)
+      setCurrentIndex(0)
+      setCurrentSong(shuffledSongs[0])
       setIsPlaying(true)
     }
+  }
+
+  const handleSongSelect = (song, index) => {
+    // Set up playlist and play selected song
+    setPlaylist(albumSongs)
+    setCurrentIndex(index)
+    setCurrentSong(song)
   }
 
   if (!artist || albumSongs.length === 0) {
@@ -166,7 +302,6 @@ function Album({ setCurrentSong }) {
         <div className="album-cover">
           <img src={artist.image || "/placeholder.svg"} alt={artist.name} />
         </div>
-
         <div className="album-info">
           <span className="album-type">Artist</span>
           <h1 className="album-title">{artist.name}</h1>
@@ -190,20 +325,6 @@ function Album({ setCurrentSong }) {
           Play All
         </button>
 
-        <button className="shuffle-btn" onClick={handleShuffle}>
-          <svg width="20" height="20" fill="#b3b3b3" viewBox="0 0 24 24">
-            <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z" />
-          </svg>
-          Shuffle
-        </button>
-
-        <button className="more-options-btn">
-          <svg width="20" height="20" fill="#b3b3b3" viewBox="0 0 24 24">
-            <circle cx="12" cy="5" r="2" />
-            <circle cx="12" cy="12" r="2" />
-            <circle cx="12" cy="19" r="2" />
-          </svg>
-        </button>
       </div>
 
       {/* Songs List */}
@@ -211,9 +332,8 @@ function Album({ setCurrentSong }) {
         <div className="songs-header">
           <div className="song-number">#</div>
           <div className="song-title">Title</div>
-          <div className="song-duration">Duration</div>
+          
         </div>
-
         <div className="songs-list">
           {albumSongs.map((song, index) => (
             <div key={index} className="album-song-row">
@@ -226,13 +346,13 @@ function Album({ setCurrentSong }) {
                 </div>
               </div>
               <div className="song-actions">
-                <button className="play-song-btn" onClick={() => setCurrentSong(song)} title="Play song">
+                <button className="play-song-btn" onClick={() => handleSongSelect(song, index)} title="Play song">
                   <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24">
                     <polygon points="6,4 20,12 6,20" />
                   </svg>
                 </button>
               </div>
-              <div className="song-duration">3:24</div>
+              
             </div>
           ))}
         </div>
@@ -247,9 +367,10 @@ function Album({ setCurrentSong }) {
           ))}
         </div>
       </div>
-      <br/><br/><br/>
+      <br />
+      <br />
+      <br />
     </div>
-    
   )
 }
 
